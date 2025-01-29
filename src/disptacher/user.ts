@@ -1,8 +1,7 @@
 import { userLoginRequest, userLoginSuccess } from "@/store/userLogin";
 import { type Dispatch } from "@reduxjs/toolkit";
 import { userLoginPayload, userRegisterPayload } from "@/interface/interaces";
-import { userRegisterFailed, userRegisterRequest } from "@/store/userRegister";
-import { error } from "console";
+import { userRegisterFailed, userRegisterRequest, userRegisterSuccess } from "@/store/userRegister";
 
 export const userLoginDispatchAction = (payload: userLoginPayload) => async (dispatch: Dispatch) => {
   dispatch(userLoginRequest());
@@ -32,10 +31,11 @@ export const userRegisterDispatchAction = (payload: userRegisterPayload) => asyn
       body: JSON.stringify(payload)
     });
     const data = await response.json();
-    if (data.error) {
-      throw new Error(data.error)
+    if (response.status !== 201) {
+      console.log(data)
+      throw new Error(data.error);
     } else {
-      dispatch(userLoginSuccess(data.message))
+      dispatch(userRegisterSuccess(data))
     }
   } catch (error) {
     dispatch(userRegisterFailed(error))

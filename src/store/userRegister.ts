@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   isLoading: false,
   error: null,
-  user: null
+  message: "Don't have a account yet? Register Here!"
 }
 
 const userRegisterSlice = createSlice({
@@ -13,17 +13,17 @@ const userRegisterSlice = createSlice({
     userRegisterRequest(state){
       state.isLoading = true;
       state.error = null;
-      state.user = null;
+      state.message = initialState.message;
     },
     userRegisterSuccess(state, action){
       state.isLoading = false;
       state.error = null;
-      state.user = action.payload;
+      state.message = action.payload;
     },
     userRegisterFailed(state, action){
       state.isLoading = false;
       state.error = action.payload;
-      state.user = null;
+      state.message = "";
     }
   }
 });

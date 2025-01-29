@@ -6,8 +6,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "react-router-dom";
 import { CircleCheck } from 'lucide-react';
 import useRegister from "@/hooks/useRegister"
+import { useSelector } from "react-redux"
 
 function Register() {
+  const { message, error } = useSelector((state: any) =>  state.userRegister)
+
   const { tabValue, loginDetails, registerDetails, tabValueHandler, handleLogin, handleRegister, handleLoginClick, handleRegisterClick} = useRegister()
 
   return (
@@ -29,11 +32,11 @@ function Register() {
               <CardContent className="space-y-2">
                 <div className="space-y-1">
                   <Label htmlFor="name">Username/Email</Label>
-                  <Input id="name" placeholder="Username/Email" name="username" value={loginDetails.username} onChange={handleLogin}/>
+                  <Input id="name" placeholder="Username/Email" name="username" value={loginDetails.username} onChange={handleLogin} required/>
                 </div>
                 <div className="space-y-1">
                   <Label htmlFor="username">Password</Label>
-                  <Input id="username" type="password" placeholder="Password" name="password" value={loginDetails.password} onChange={handleLogin}/>
+                  <Input id="username" type="password" placeholder="Password" name="password" value={loginDetails.password} onChange={handleLogin} required/>
                 </div>
               </CardContent>
               <CardFooter className="justify-between">
@@ -46,30 +49,29 @@ function Register() {
             <Card>
               <CardHeader>
                 <CardTitle>Register</CardTitle>
-                <CardDescription>
-                  Don't have a account yet? Register Here!
-                </CardDescription>
+                  {message && <CardDescription>{message}</CardDescription>}
+                  {error && <CardDescription className="text-[red]">{error.toString()}</CardDescription>}
               </CardHeader>
               <CardContent className="space-y-2">
                 <div className="space-y-1">
-                  <Label htmlFor="username">Username</Label>
-                  <Input id="username" type="text" placeholder="Username" value={registerDetails.username} name="username" onChange={handleRegister}/>
+                  <Label htmlFor="username">Username <span className="text-[red]">*</span></Label>
+                  <Input id="username" type="text" placeholder="Username" value={registerDetails.username} name="username" onChange={handleRegister} required/>
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" type="text" placeholder="Name" value={registerDetails.name} name="name" onChange={handleRegister}/>
+                  <Label htmlFor="name">Name <span className="text-[red]">*</span></Label>
+                  <Input id="name" type="text" placeholder="Name" value={registerDetails.name} name="name" onChange={handleRegister} required/>
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="Email" value={registerDetails.email} name="email" onChange={handleRegister}/>
+                  <Label htmlFor="email">Email <span className="text-[red]">*</span></Label>
+                  <Input id="email" type="email" placeholder="Email" value={registerDetails.email} name="email" onChange={handleRegister} required/>
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor="confirm-email">Confirm Email</Label>
-                  <Input id="confirm-email" type="email" placeholder="Confirm Email" value={registerDetails.confirmEmail} name="confirmEmail" onChange={handleRegister}/>
+                  <Label htmlFor="confirm-email">Confirm Email <span className="text-[red]">*</span></Label>
+                  <Input id="confirm-email" type="email" placeholder="Confirm Email" value={registerDetails.confirmEmail} name="confirmEmail" onChange={handleRegister} required/>
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor="password">Password</Label>
-                  <Input id="password" type="password" placeholder="Password" value={registerDetails.password} name="password" onChange={handleRegister}/>
+                  <Label htmlFor="password">Password <span className="text-[red]">*</span></Label>
+                  <Input id="password" type="password" placeholder="Password" value={registerDetails.password} name="password" onChange={handleRegister} required/>
                 </div>
                 <div className="space-y-1 flex flex-col bg-[#F5F5F5] p-2">
                   <p className="flex gap-2"><CircleCheck/> Must have alteast 8 characters.</p>
@@ -78,8 +80,8 @@ function Register() {
                   <p className="flex gap-2"><CircleCheck/> Must starts with a captital alphabet.</p>
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor="confirm-password">Confirm Password</Label>
-                  <Input id="confirm-password" type="password" placeholder="Confirm Password" value={registerDetails.confirmPassword} name="confirmPassword" onChange={handleRegister}/>
+                  <Label htmlFor="confirm-password">Confirm Password <span className="text-[red]">*</span></Label>
+                  <Input id="confirm-password" type="password" placeholder="Confirm Password" value={registerDetails.confirmPassword} name="confirmPassword" onChange={handleRegister} required/>
                 </div>
               </CardContent>
               <CardFooter>
