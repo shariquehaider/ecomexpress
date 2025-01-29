@@ -10,7 +10,7 @@ import { useSelector } from "react-redux"
 
 function Register() {
   const { message, error } = useSelector((state: any) =>  state.userRegister)
-
+  
   const { tabValue, loginDetails, registerDetails, tabValueHandler, handleLogin, handleRegister, handleLoginClick, handleRegisterClick} = useRegister()
 
   return (

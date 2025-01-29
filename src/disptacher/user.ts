@@ -32,7 +32,6 @@ export const userRegisterDispatchAction = (payload: userRegisterPayload) => asyn
     });
     const data = await response.json();
     if (response.status !== 201) {
-      console.log(data)
       throw new Error(data.error);
     } else {
       dispatch(userRegisterSuccess(data))
