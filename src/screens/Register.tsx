@@ -10,8 +10,8 @@ import { useSelector } from "react-redux"
 
 function Register() {
   const { message, error } = useSelector((state: any) =>  state.userRegister)
-  
-  const { tabValue, loginDetails, registerDetails, tabValueHandler, handleLogin, handleRegister, handleLoginClick, handleRegisterClick} = useRegister()
+
+  const { tabValue, loginDetails, registerDetails, rules, tabValueHandler, handleLogin, handleRegister, handleLoginClick, handleRegisterClick} = useRegister()
 
   return (
     <>
@@ -74,10 +74,10 @@ function Register() {
                   <Input id="password" type="password" placeholder="Password" value={registerDetails.password} name="password" onChange={handleRegister} required/>
                 </div>
                 <div className="space-y-1 flex flex-col bg-[#F5F5F5] p-2">
-                  <p className="flex gap-2"><CircleCheck/> Must have alteast 8 characters.</p>
-                  <p className="flex gap-2"><CircleCheck/> Must have a special character.</p>
-                  <p className="flex gap-2"><CircleCheck/> Must have a number.</p>
-                  <p className="flex gap-2"><CircleCheck/> Must starts with a captital alphabet.</p>
+                  <p className="flex gap-2"><CircleCheck className={rules.length ? "text-[green]" : ""}/> Must have alteast 8 characters.</p>
+                  <p className="flex gap-2"><CircleCheck className={rules.specialCharacter ? "text-[green]" : ""}/> Must have a special character.</p>
+                  <p className="flex gap-2"><CircleCheck className={rules.digit ? "text-[green]" : ""}/> Must have at least one digit.</p>
+                  <p className="flex gap-2"><CircleCheck className={rules.upperCase ? "text-[green]" : ""}/> Must hav at least one uppercase letter</p>
                 </div>
                 <div className="space-y-1">
                   <Label htmlFor="confirm-password">Confirm Password <span className="text-[red]">*</span></Label>
