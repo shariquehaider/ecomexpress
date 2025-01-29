@@ -1,9 +1,12 @@
-import { useState } from 'react'
+import { userLoginPayload } from '@/interface/interaces';
+import { useState } from 'react';
+import { userLoginDispatchAction } from '@/disptacher/user';
+import store from '@/store';
 
 type TabValue = 'login' | 'register'
 function useRegister() {
   const [tabValue, setTabValue] = useState<TabValue>("login");
-  const [loginDetails, setLoginDetails] = useState({
+  const [loginDetails, setLoginDetails] = useState<userLoginPayload>({
     username: "",
     password: ""
   });
@@ -27,7 +30,7 @@ function useRegister() {
   }
 
   const handleLoginClick = () => {
-    console.log(loginDetails)
+    store.dispatch(userLoginDispatchAction(loginDetails));
   }
 
   const handleRegister = (event: React.FormEvent<HTMLInputElement>) => {
@@ -47,3 +50,5 @@ function useRegister() {
 }
 
 export default useRegister
+
+
