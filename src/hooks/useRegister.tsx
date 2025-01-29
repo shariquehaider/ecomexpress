@@ -1,6 +1,6 @@
-import { userLoginPayload } from '@/interface/interaces';
+import { userLoginPayload, userRegisterPayload } from '@/interface/interaces';
 import { useState } from 'react';
-import { userLoginDispatchAction } from '@/disptacher/user';
+import { userLoginDispatchAction, userRegisterDispatchAction } from '@/disptacher/user';
 import store from '@/store';
 
 type TabValue = 'login' | 'register'
@@ -10,7 +10,7 @@ function useRegister() {
     username: "",
     password: ""
   });
-  const [registerDetails, setRegisterDetails] = useState({
+  const [registerDetails, setRegisterDetails] = useState<userRegisterPayload>({
     username: "",
     name: "",
     email: "",
@@ -33,6 +33,7 @@ function useRegister() {
     store.dispatch(userLoginDispatchAction(loginDetails));
   }
 
+
   const handleRegister = (event: React.FormEvent<HTMLInputElement>) => {
     const {name, value} = event.currentTarget;
     setRegisterDetails(prevValue => {
@@ -43,10 +44,14 @@ function useRegister() {
     });
   }
 
+  const handleRegisterClick = () => {
+    store.dispatch(userRegisterDispatchAction(registerDetails))
+  }
+
   const tabValueHandler = (value: TabValue) => {
     setTabValue(value)
   }
-  return {tabValue, loginDetails, registerDetails, tabValueHandler, handleLogin, handleRegister, handleLoginClick}
+  return {tabValue, loginDetails, registerDetails, tabValueHandler, handleLogin, handleRegister, handleLoginClick, handleRegisterClick}
 }
 
 export default useRegister

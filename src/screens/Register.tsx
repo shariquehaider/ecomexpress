@@ -8,7 +8,7 @@ import { CircleCheck } from 'lucide-react';
 import useRegister from "@/hooks/useRegister"
 
 function Register() {
-  const { tabValue, loginDetails, registerDetails, tabValueHandler, handleLogin, handleRegister, handleLoginClick} = useRegister()
+  const { tabValue, loginDetails, registerDetails, tabValueHandler, handleLogin, handleRegister, handleLoginClick, handleRegisterClick} = useRegister()
 
   return (
     <>
@@ -83,7 +83,7 @@ function Register() {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button>Register</Button>
+                <Button type="button" onClick={handleRegisterClick}>Register</Button>
               </CardFooter>
             </Card>
           </TabsContent>
