@@ -91,6 +91,7 @@ h1 {
   position: relative;
   z-index: 1;
   min-width: 38rem;
+  box-shadow: rgba(141, 139, 139, 0) 10px 0px 0px 0px;
 }
 
 .account-card .card {
@@ -116,6 +117,7 @@ h1 {
   position: relative;
   display: table;
   padding: 8px;
+  background-color: none;
 }
 
 .account-card .card .icon::after {
@@ -123,8 +125,6 @@ h1 {
   position: absolute;
   inset: 4.5px;
   border-radius: 50%;
-  background-color: var(--card-icon-background-color);
-  border: 1px solid var(--card-icon-border-color);
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
   transition: background-color 0.25s, border-color 0.25s;
@@ -139,6 +139,12 @@ h1 {
   transform: translateZ(0);
   color: var(--card-icon-color);
   transition: color 0.25s;
+  transition: all 0.5s;
+}
+
+.account-card .card:hover .icon svg {
+  width: 50px;
+  height: 50px;
 }
 
 .account-card .card h4 {
@@ -366,7 +372,6 @@ h1 {
 }
 
 .account-card .card:hover .icon::after {
-  background-color: var(--card-hover-icon-background-color);
   border-color: var(--card-hover-icon-border-color);
 }
 

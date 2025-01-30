@@ -5,6 +5,7 @@ import RootLayout from './components/RootLayout'
 import Home from './screens/Home'
 import Register from './screens/Register'
 import Account from './screens/Account'
+import ProtectedRoute from './components/ProtectedRoute'
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/account',
-        element: <Account/>
+        element: <ProtectedRoute><Account/></ProtectedRoute>
       }
     ]
   } 
