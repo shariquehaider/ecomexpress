@@ -9,6 +9,21 @@ import {
 function HomeCarousel() {
   return (
     <>
+      <div className="mx-auto max-w-xs">
+        <Carousel className="w-full max-w-xs">
+        <CarouselContent>
+          <CarouselItem/>
+            <div className="w-full flex">
+              <div>
+                <img src="" alt="" />
+              </div>
+            </div>
+          <CarouselItem/>
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+        </Carousel>
+      </div>
       
     </>
   )

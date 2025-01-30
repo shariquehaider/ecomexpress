@@ -1,7 +1,8 @@
-import { userLoginRequest, userLoginSuccess } from "@/store/userLogin";
+import { userLoginFailed, userLoginRequest, userLoginSuccess } from "@/store/userLogin";
 import { type Dispatch } from "@reduxjs/toolkit";
 import { userLoginPayload, userRegisterPayload } from "@/interface/interaces";
 import { userRegisterFailed, userRegisterRequest, userRegisterSuccess } from "@/store/userRegister";
+import { redirect } from "react-router-dom";
 
 export const userLoginDispatchAction = (payload: userLoginPayload) => async (dispatch: Dispatch) => {
   dispatch(userLoginRequest());
@@ -14,9 +15,15 @@ export const userLoginDispatchAction = (payload: userLoginPayload) => async (dis
       body: JSON.stringify(payload)
     });
     const data = await response.json();
-    console.log(data);
+    if (response.status !== 200) {
+      throw new Error(data.error)
+    } else {
+      localStorage.setItem('token', data.token)
+      dispatch(userLoginSuccess());
+      redirect("/")
+    }
   } catch (error) {
-    console.log(error);
+    dispatch(userLoginFailed(error))
   }
 }
 

@@ -14,10 +14,13 @@ import {
 import { ShoppingCart, Search, CircleX } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const [switchToggle, setSwitchToggle] = useState<boolean>(false);
   const [searchText, setSearchText ] = useState<string>("");
+  const { isAuthenticated } = useSelector((state: any) =>  state.userLogin)
+
 
   const searchOnChange = (event: React.FormEvent<HTMLInputElement>) => {
     setSearchText(event.currentTarget.value)
@@ -42,18 +45,20 @@ function Navbar() {
           <Button type="button" onClick={handleClick} variant={"secondary"}><Search /></Button>
         </div>
         <div className="extras">
-          <DropdownMenu>
+          {!isAuthenticated && <Button asChild><Link to="/login">Login</Link></Button>}
+          {isAuthenticated && <>
+            <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant={"outline"} className="">Account & Lists</Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 bg-black text-white">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator className="bg-white" />
-              <DropdownMenuGroup className="pl-[1rem]">
-                <DropdownMenuItem>My Profile</DropdownMenuItem>
-                <DropdownMenuItem>My Orders</DropdownMenuItem>
-                <DropdownMenuItem>My Wishlist</DropdownMenuItem>
-                <DropdownMenuItem>My Address</DropdownMenuItem>
+              <DropdownMenuGroup>
+                <DropdownMenuItem><Button asChild variant={"link"}><Link to="/account">My Profile</Link></Button></DropdownMenuItem>
+                <DropdownMenuItem><Button asChild variant={"link"}><Link to="/account/orders">My Orders</Link></Button></DropdownMenuItem>
+                <DropdownMenuItem><Button asChild variant={"link"}><Link to="/account/wishlist">My Wishlist</Link></Button></DropdownMenuItem>
+                <DropdownMenuItem><Button asChild variant={"link"}><Link to="/account/address">My Address</Link></Button></DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator className="bg-white" />
               <DropdownMenuGroup className="pl-[1rem]">
@@ -68,6 +73,7 @@ function Navbar() {
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
+          </>}
           <Button asChild className={cn('flex flex-col')}><Link to='/cart'><ShoppingCart />My Cart</Link></Button>
         </div>
         <div className="mobile-search">

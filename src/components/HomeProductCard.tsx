@@ -1,9 +1,9 @@
-import React from 'react'
+
 
 function HomeProductCard() {
   return (
     <>
-    <div className="container">
+    <div className="container product-card">
         <div className="card">
             <div className="imgBx">
                 <img src="http://pngimg.com/uploads/running_shoes/running_shoes_PNG5782.png" alt="nike-air-shoe" />

@@ -3,15 +3,20 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { CircleCheck } from 'lucide-react';
 import useRegister from "@/hooks/useRegister"
 import { useSelector } from "react-redux"
 
 function Register() {
-  const { message, error } = useSelector((state: any) =>  state.userRegister)
+  const { message, error } = useSelector((state: any) =>  state.userRegister);
+  const { isAuthenticated } = useSelector((state: any) => state.userLogin);
 
   const { tabValue, loginDetails, registerDetails, rules, tabValueHandler, handleLogin, handleRegister, handleLoginClick, handleRegisterClick} = useRegister()
+
+  if (isAuthenticated) {
+    return <Navigate to="/" replace/>
+  }
 
   return (
     <>
@@ -49,7 +54,7 @@ function Register() {
             <Card>
               <CardHeader>
                 <CardTitle>Register</CardTitle>
-                  {message && <CardDescription>{message}</CardDescription>}
+                  {message && <CardDescription>{message.message}</CardDescription>}
                   {error && <CardDescription className="text-[red]">{error.toString()}</CardDescription>}
               </CardHeader>
               <CardContent className="space-y-2">
