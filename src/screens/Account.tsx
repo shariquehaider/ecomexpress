@@ -1,5 +1,9 @@
 import AccountCard from '@/components/AccountCard';
+import { userDetailsDispatchAction } from '@/disptacher/user';
+import { toast } from '@/hooks/use-toast';
+import store from '@/store';
 import { BaggageClaim, KeyRound, MapPinHouse, Settings } from 'lucide-react';
+import { useSelector } from 'react-redux';
 
 
 const cardData = [
@@ -34,10 +38,18 @@ const cardData = [
 ]
 
 function Account() {
+  const {error, userDetails} = useSelector((state: any) => state.userDetails)
+  console.log(userDetails)
+  if (error) {
+    toast({
+      description: error
+    })
+  }
+
   return (
     <>
       <div className='w-full p-[4rem_20rem] flex flex-col justify-center'>
-        <div className='text-left text-2xl font-bold'>Welcome, Sharique</div>
+        <div className='text-left text-2xl font-bold'>Welcome, {userDetails.user.name}</div>
         <div className='p-[2rem_0] flex gap-[2rem] flex-wrap justify-center'>
           {cardData.map(ele => <AccountCard key={ele.id} title={ele.title} desc={ele.desc} link={ele.link}>{ele.icon}</AccountCard>)}
         </div>
@@ -46,4 +58,10 @@ function Account() {
   )
 }
 
-export default Account
+export default Account;
+
+
+export const userLoader = async () => {
+  await store.dispatch(userDetailsDispatchAction())
+  return 
+}

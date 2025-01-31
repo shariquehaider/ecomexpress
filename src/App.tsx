@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import RootLayout from './components/RootLayout'
 import Home from './screens/Home'
 import Register from './screens/Register'
-import Account from './screens/Account'
+import Account, { userLoader } from './screens/Account'
 import ProtectedRoute from './components/ProtectedRoute'
 
 const router = createBrowserRouter([
@@ -22,7 +22,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/account',
-        element: <ProtectedRoute><Account/></ProtectedRoute>
+        element: <ProtectedRoute><Account/></ProtectedRoute>,
+        loader: userLoader
       }
     ]
   } 
