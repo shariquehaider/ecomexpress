@@ -4,6 +4,10 @@ import { Label } from './ui/label';
 import { Button } from './ui/button';
 import { useState } from 'react';
 import { newPassword } from '@/interface/interaces';
+import store from '@/store';
+import { changePasswordDispatchAction } from '@/disptacher/user';
+import { useSelector } from 'react-redux';
+import { toast } from '@/hooks/use-toast';
 
 function LoginCredentials({user}: {user: any}) {
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
@@ -12,6 +16,19 @@ function LoginCredentials({user}: {user: any}) {
     newPassword: "",
     confirmNewPassword: ""
   });
+
+  const {error, message} = useSelector((state: any) => state.changePassword)
+
+  if (error) {
+    toast({
+      description: error.toString()
+    })
+  } else if (message) {
+    toast({
+      description: message
+    })
+  }
+
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     const {name, value} = event.currentTarget;
@@ -28,10 +45,9 @@ function LoginCredentials({user}: {user: any}) {
   }
 
   const handleSubmit = () => {
-    console.log(password)
+    store.dispatch(changePasswordDispatchAction(password))
   }
 
-  console.log(user)
   return (
     <>
       <div className='p-[0rem_0] flex flex-col text-white gap-5'>
