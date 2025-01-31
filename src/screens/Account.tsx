@@ -12,28 +12,28 @@ const cardData = [
     icon: <BaggageClaim />,
     title: "Your Orders",
     desc: "Track, return, or buy things again",
-    link: "/account/orders"
+    link: "/account/settings#orders"
   },
   {
     id: 2,
     icon: <KeyRound />,
     title: "Login & security",
     desc: "Edit login, name, and mobile number",
-    link: "/account/settings/login"
+    link: "/account/settings#login"
   },
   {
     id: 3,
     icon: <MapPinHouse />,
     title: "Your Address",
     desc: "Edit addresses for orders and gifts",
-    link: "/account/address"
+    link: "/account/settings#address"
   },
   {
     id: 4,
     icon: <Settings />,
-    title: "Settings",
+    title: "Account Settings",
     desc: "Edit account settings",
-    link: "/account/settings"
+    link: "/account/settings#settings"
   }
 ]
 
