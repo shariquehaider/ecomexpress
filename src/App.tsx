@@ -6,7 +6,7 @@ import Home from './screens/Home'
 import Register from './screens/Register'
 import Account, { userLoader } from './screens/Account'
 import ProtectedRoute from './components/ProtectedRoute'
-import SettingsPage from './screens/SettingsPage'
+import SettingsPage, { settingsLoader } from './screens/SettingsPage'
 
 const router = createBrowserRouter([
   {
@@ -28,7 +28,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/account/settings',
-        element: <ProtectedRoute><SettingsPage/></ProtectedRoute>
+        element: <ProtectedRoute><SettingsPage/></ProtectedRoute>,
+        loader: settingsLoader
       }
     ]
   } 

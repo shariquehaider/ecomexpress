@@ -11,3 +11,9 @@ export interface userRegisterPayload {
   confirmPassword: string,
   name: string
 }
+
+export interface newPassword {
+  currentPassword: string,
+  newPassword: string,
+  confirmNewPassword: string
+}
