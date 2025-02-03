@@ -15,6 +15,7 @@ import { ShoppingCart, Search, CircleX } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { link } from "fs";
 
 function Navbar() {
   const [switchToggle, setSwitchToggle] = useState<boolean>(false);
@@ -45,11 +46,11 @@ function Navbar() {
           <Button type="button" onClick={handleClick} variant={"secondary"}><Search /></Button>
         </div>
         <div className="extras">
-          {!isAuthenticated && <Button asChild><Link to="/login">Login</Link></Button>}
+          {!isAuthenticated && <Button variant={"link"} asChild><Link to="/login">Login</Link></Button>}
           {isAuthenticated && <>
             <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant={"outline"} className="">Account & Lists</Button>
+              <Button variant={"outline"}>Account & Lists</Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 bg-black text-white">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>

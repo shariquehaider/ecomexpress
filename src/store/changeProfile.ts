@@ -27,6 +27,29 @@ const changePasswordSlice = createSlice({
   }
 });
 
+const addressSlice = createSlice({
+  name: 'addressDetails',
+  initialState,
+  reducers: {
+    updateAddressRequest(state) {
+      state.isLoading = true;
+      state.error = null;
+      state.response = null;
+    },
+    updateAddressSuccess(state, action){
+      state.isLoading = false;
+      state.response = action.payload;
+    },
+    updateAddressFailed(state, action){
+      state.error = action.payload;
+      state.isLoading = false;
+    }
+  }
+});
+
+export const { updateAddressFailed, updateAddressRequest, updateAddressSuccess } = addressSlice.actions;
+export const updateAddressReducer = addressSlice.reducer
+
 
 export const { changePasswordRequest, changePasswordSuccess, changePasswordFailed } = changePasswordSlice.actions;
 

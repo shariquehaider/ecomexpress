@@ -1,11 +1,10 @@
 import { userLoginFailed, userLoginRequest, userLoginSuccess } from "@/store/userLogin";
 import { type Dispatch } from "@reduxjs/toolkit";
-import { newPassword, userLoginPayload, userRegisterPayload } from "@/interface/interaces";
+import { newPassword, updateAddressInterface, userLoginPayload, userRegisterPayload } from "@/interface/interaces";
 import { userRegisterFailed, userRegisterRequest, userRegisterSuccess } from "@/store/userRegister";
 import { redirect } from "react-router-dom";
 import { userDetailsFailed, userDetailsRequest, userDetailsSuccess } from "@/store/userDetails";
-import { error } from "console";
-import { changePasswordFailed, changePasswordRequest } from "@/store/changeProfile";
+import { changePasswordFailed, changePasswordRequest, updateAddressFailed, updateAddressRequest, updateAddressSuccess } from "@/store/changeProfile";
 
 export const userLoginDispatchAction = (payload: userLoginPayload) => async (dispatch: Dispatch) => {
   dispatch(userLoginRequest());
@@ -94,3 +93,28 @@ export const changePasswordDispatchAction = (payload: newPassword) => async (dis
     dispatch(changePasswordFailed(error))
   }
 }
+
+export const updateAddressDispatchAction = (payload: updateAddressInterface) => async (dispatch: Dispatch) => {
+  dispatch(updateAddressRequest());
+  try {
+
+    const token = localStorage.getItem('token');
+    const response = await fetch("http://localhost:8000/api/account/address", {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(payload)
+    });
+    const data = await response.json();
+    if (response.status == 202) {
+      dispatch(updateAddressSuccess(data))
+    } else {
+      throw new Error(data.error)
+    }
+  } catch (error) {
+    dispatch(updateAddressFailed(error))
+  }
+}
+

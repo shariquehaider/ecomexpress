@@ -17,3 +17,14 @@ export interface newPassword {
   newPassword: string,
   confirmNewPassword: string
 }
+
+
+export interface updateAddressInterface {
+  addressType: string,
+  addressLine: string,
+  city: string,
+  country: string,
+  state: string,
+  pinCode: string
+  phone: string
+}

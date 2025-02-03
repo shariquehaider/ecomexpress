@@ -19,7 +19,7 @@ const cardData = [
     icon: <KeyRound />,
     title: "Login & security",
     desc: "Edit login, name, and mobile number",
-    link: "/account/settings#login"
+    link: "/account/settings#credentials"
   },
   {
     id: 3,

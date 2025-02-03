@@ -3,7 +3,7 @@ import userLoginReducer from "@/store/userLogin";
 import userRegisterReducer from "@/store/userRegister";
 import userDetailsReducer from "@/store/userDetails";
 import tabNameReducer from "@/store/tabName";
-import { changePasswordReducer } from "./changeProfile";
+import { changePasswordReducer, updateAddressReducer } from "./changeProfile";
 
 const store = configureStore({
   reducer: {
@@ -11,7 +11,8 @@ const store = configureStore({
     userRegister: userRegisterReducer,
     userDetails: userDetailsReducer,
     tabName: tabNameReducer,
-    changePassword: changePasswordReducer
+    changePassword: changePasswordReducer,
+    updateAddress: updateAddressReducer
   }
 });
 
